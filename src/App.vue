@@ -2,28 +2,28 @@
   <html id="app">
     <head>
       <meta charset="utf-8">
-      <title>monitor man</title>
+      <title>GodEye</title>
     </head>
     <body>
     <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <router-link class="navbar-brand" to="/">monitor-man</router-link>
+      <router-link class="navbar-brand" to="/">GodEye</router-link>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item" v-bind:class="{ active: nav == 'collection'}">
-            <router-link class="nav-link" to="/collection/create">Collection</router-link>
+            <router-link class="nav-link" to="/collection/create">用例集合</router-link>
           </li>
           <li class="nav-item" v-bind:class="{ active: nav == 'handler'}">
-            <router-link class="nav-link" to="/handler">Handler</router-link>
+            <router-link class="nav-link" to="/handler">错误处理器</router-link>
           </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" v-if="nav == 'home'">
-          <label>Tag</label>
+          <label>环境标签</label>
           <select v-model="tag">
-            <option value=""></option>
+            <option value="">全部</option>
             <option :value="tag" v-for="tag in tags">{{tag}}</option>
           </select>
         </form>

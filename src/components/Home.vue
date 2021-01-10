@@ -7,7 +7,7 @@
             {{item.name}}
           </router-link>
           <span class="badge badge-default" style="margin: 0 5px;" v-for="tag in item.tag">{{tag}}</span>
-          <span v-on:click="showConfirm('Delete collection', 'delete '+item.name, item.id, remove)" class="mm-click" style="float: right;margin-left: 10px;">
+          <span v-on:click="showConfirm('删除用例集合', '确定删除用例集合 '+item.name, item.id, remove)" class="mm-click" style="float: right;margin-left: 10px;">
         <icon name="remove"></icon>
         </span>
           <router-link :to="{ name: 'CollectionUpdate', params: {id: item.id} }" style="float: right;">
@@ -18,54 +18,61 @@
           <p class="card-text" v-if="item.description">{{item.description}}</p>
             <div :class="{ 'collection-warn': item.summary && (item.summary.assertions.failed > 0 || item.summary.testScripts.failed > 0) }">
               <span v-if="item.status == 'running' && item.summary">
-                <button class="btn btn-success btn-sm mm-click" v-on:click="showConfirm('Change collection status', 'stop '+item.name, {id: item.id, status: 'stop'}, setStatus)">
-                  running
+                <button class="btn btn-success btn-sm mm-click" v-on:click="showConfirm('变更用例集合状态', '暂停执行 '+item.name, {id: item.id, status: 'stop'},
+                setStatus)">
+                  运行中
                 </button>
               </span>
               <span v-if="item.status == 'running' && !item.summary">
-                <button class="btn btn-warning btn-sm mm-click" v-on:click="showConfirm('Change collection status', 'stop '+item.name, {id: item.id, status: 'stop'}, setStatus)">
-                  running
+                <button class="btn btn-warning btn-sm mm-click" v-on:click="showConfirm('变更用例集合状态', '暂停执行 '+item.name, {id: item.id, status: 'stop'}, setStatus)">
+                  运行中
                 </button>
               </span>
               <span v-if="item.status == 'stop'">
-                <button class="btn btn-danger btn-sm mm-click" v-on:click="showConfirm('Change collection status', 'start '+item.name, {id: item.id, status: 'running'}, setStatus)">
-                  stop
+                <button class="btn btn-danger btn-sm mm-click" v-on:click="showConfirm('变更用例集合状态', '开始执行 '+item.name,
+                {id: item.id, status: 'running'}, setStatus)">
+                  已暂停
                 </button>
               </span>
               <span>
                 <button class="btn btn-primary btn-sm" disabled="disabled" v-if="item.summary">
-                  Cost <span class="badge my-badge-primary badge-pill">{{item.summary.cost}}ms</span>
+                  耗费 <span class="badge my-badge-primary badge-pill">{{item.summary.cost}}ms</span>
                 </button>
               </span>
               <span>
+                <button class="btn btn-primary btn-sm" disabled="disabled" v-if="item.summary">
+                  执行周期 <span class="badge my-badge-primary badge-pill">{{item.summary.started}} - {{item.summary.completed}}</span>
+                </button>
+              </span>
+              <!--<span>
                 <button class="btn btn-default btn-sm" disabled="disabled" v-if="item.summary">
                   {{item.summary.started}} - {{item.summary.completed}}
                 </button>
-              </span>
+              </span>-->
               <span>
                 <button class="btn btn-success btn-sm" disabled="disabled" v-if="item.summary">
-                  Assertions Success <span class="badge my-badge-success badge-pill">{{item.summary.assertions.success}}</span>
+                  断言成功 <span class="badge my-badge-success badge-pill">{{item.summary.assertions.success}}</span>
                 </button>
               </span>
               <span>
                 <button class="btn btn-danger btn-sm" disabled="disabled" v-if="item.summary && item.summary.assertions.failed == 0">
-                  Assertions failure <span class="badge my-badge-danger badge-pill">{{item.summary.assertions.failed}}</span>
+                  断言失败 <span class="badge my-badge-danger badge-pill">{{item.summary.assertions.failed}}</span>
                 </button>
                 <button class="btn btn-danger btn-sm mm-click" v-on:click="showFailures(item.id, item.summary.assertions.failures, 'Assertions Failures')" v-else-if="item.summary">
-                  Assertions failure <span class="badge my-badge-danger badge-pill">{{item.summary.assertions.failed}}</span>
+                  断言失败 <span class="badge my-badge-danger badge-pill">{{item.summary.assertions.failed}}</span>
                 </button>
               </span>
               <span>
                 <button class="btn btn-success btn-sm" disabled="disabled" v-if="item.summary">
-                  TestScripts Success <span class="badge my-badge-success badge-pill">{{item.summary.testScripts.success}}</span>
+                  断言脚本正确 <span class="badge my-badge-success badge-pill">{{item.summary.testScripts.success}}</span>
                 </button>
               </span>
               <span>
                 <button class="btn btn-danger btn-sm" disabled="disabled" v-if="item.summary && item.summary.testScripts.failed == 0">
-                  TestScripts failure <span class="badge my-badge-danger badge-pill">{{item.summary.testScripts.failed}}</span>
+                  断言脚本错误 <span class="badge my-badge-danger badge-pill">{{item.summary.testScripts.failed}}</span>
                 </button>
                 <button class="btn btn-danger btn-sm mm-click" v-on:click="showFailures(item.id, item.summary.testScripts.failures, 'TestScripts Failures')" v-else-if="item.summary">
-                  TestScripts failure <span class="badge my-badge-danger badge-pill">{{item.summary.testScripts.failed}}</span>
+                  断言脚本错误 <span class="badge my-badge-danger badge-pill">{{item.summary.testScripts.failed}}</span>
                 </button>
               </span>
             </div>
@@ -115,7 +122,7 @@
         this.$http.get(uri).then(resp => {
           this.items = resp.data;
         }).catch(error => {
-          this.$bus.$emit('error', 'http request: ' + uri, error.message);
+          this.$bus.$emit('error', 'HTTP请求为: ' + uri, error.message);
         });
       },
       showFailures(id, failures, title) {
@@ -142,7 +149,7 @@
           .then(() => {
             this.fetchData(this.tag);
           }).catch(error => {
-            this.$bus.$emit('error', 'http request: ' + uri, error.message);
+            this.$bus.$emit('error', 'HTTP请求为: ' + uri, error.message);
           });
       },
       setStatus(confirmModal) {
@@ -153,7 +160,7 @@
           .then(() => {
             this.fetchData(this.tag);
           }).catch(error => {
-            this.$bus.$emit('error', 'http request: ' + uri, error.message);
+            this.$bus.$emit('error', 'HTTP请求为: ' + uri, error.message);
           });
       }
     },

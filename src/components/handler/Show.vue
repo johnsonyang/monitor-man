@@ -1,10 +1,11 @@
 <template>
   <div>
-    <router-link :to="{ name: 'HandlerCreate' }">New</router-link>
+    <router-link :to="{ name: 'HandlerCreate' }">创建错误处理器</router-link>
     <div class="card" v-for="handler in handlers">
       <h5 class="card-header">
         {{handler.name}}
-        <span v-on:click="showConfirm('Delete handler', 'delete '+handler.name, handler.id, remove)" class="mm-click" style="color: #308ede;float: right;margin-left: 10px;">
+        <span v-on:click="showConfirm('删除错误处理器', '确定删除错误处理器 '+handler.name, handler.id, remove)" class="mm-click"
+              style="color: #308ede;float: right;margin-left: 10px;">
         <icon name="remove"></icon>
         </span>
         <router-link :to="{ name: 'HandlerUpdate', params: {id: handler.id} }" style="float: right;">

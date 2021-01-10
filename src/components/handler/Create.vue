@@ -1,19 +1,19 @@
 <template>
   <div style="margin-bottom: 50px;">
-    <h3 style="background-color: #f8f8f8;line-height: 3.5;text-align: center;"><span style="color: red;">Create</span></h3>
+    <h3 style="background-color: #f8f8f8;line-height: 3.5;text-align: center;"><span style="color: red;">创建错误处理器</span></h3>
     <form v-on:submit.prevent="submit">
       <div class="form-group">
-        <label>name</label>
+        <label>名称</label>
         <input v-model="form.name" type="text" class="form-control" style="width: auto">
       </div>
       <div class="form-group">
-        <label>description</label>
+        <label>描述</label>
         <textarea class="form-control" rows="5" v-model="form.description"></textarea>
       </div>
       <div class="form-group">
-        <label>javascript code</label>
+        <label>JavaScript代码</label>
         <editor v-on:content-update="code" :content="form.code" :theme="'monokai'" :height="'40rem'"></editor>
-        <p class="form-text text-muted">handler code will be run in <a href="https://www.npmjs.com/package/safe-eval">safe-eval</a>, injected variable can be used:
+        <p class="form-text text-muted">错误处理器嵌入的程序代码将在<a href="https://www.npmjs.com/package/safe-eval"> safe-eval </a>中运行，可以使用的注入的变量:
           <a href="https://nodejs.org/api/console.html">console</a>,
           <a href="https://www.npmjs.com/package/redis">redis</a>,
           <a href="https://www.npmjs.com/package/postman-request">request</a>,
@@ -22,11 +22,11 @@
           handlerParams, failures
         </p>
       </div>
-      <button type="submit" class="btn btn-primary mm-click">Submit</button>
-      <div v-on:click="debug" class="btn btn-secondary mm-click">Debug</div>
+      <button type="submit" class="btn btn-primary mm-click">创建</button>
+      <div v-on:click="debug" class="btn btn-secondary mm-click">调试</div>
     </form>
     <div style="margin-top: 2rem;">
-      <h4>Debug Result (example <span class="mm-click" style="color: #0275d8" v-on:click="showExampleSummary = true">failures</span>)</h4>
+      <h4>调试结果（示例<span class="mm-click" style="color: #0275d8" v-on:click="showExampleSummary = true">failures</span>)</h4>
       <p>
         {{debugResult}}
       </p>
@@ -36,7 +36,7 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title">Example Summary</h5>
+              <h5 class="modal-title">示例摘要</h5>
               <button type="button" class="close" v-on:click="showExampleSummary = false">
                 <span aria-hidden="true">&times;</span>
               </button>
