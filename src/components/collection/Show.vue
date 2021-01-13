@@ -2,46 +2,46 @@
   <div>
     <div class="row">
       <div class="col-12">
-        <h4 style="text-align: center;">{{collection.name}}</h4>
+        <h4 style="text-align: center;">{{collection.name}}-执行情况汇总</h4>
         <p>{{collection.description}}</p>
         <table class="table">
           <tbody>
           <tr>
-            <td>interval</td>
+            <td>执行间隔</td>
             <td>{{collection.interval}}ms</td>
           </tr>
           <tr>
-            <td>reserved date</td>
-            <td>{{collection.reserved}}day</td>
+            <td>保留天数</td>
+            <td>{{collection.reserved}}天</td>
           </tr>
           <tr>
-            <td>iterationCount</td>
+            <td>迭代次数</td>
             <td>{{collection.newmanOption.iterationCount}}</td>
           </tr>
           <tr>
-            <td>timeoutRequest</td>
+            <td>请求超时时间</td>
             <td>{{collection.newmanOption.timeoutRequest}}ms</td>
           </tr>
           <tr>
-            <td>delayRequest</td>
+            <td>请求延迟时间</td>
             <td>{{collection.newmanOption.delayRequest}}ms</td>
           </tr>
           <tr>
-            <td>ignoreRedirects</td>
+            <td>忽略重定向</td>
             <td>{{collection.newmanOption.ignoreRedirects}}</td>
           </tr>
           <tr>
-            <td>insecure</td>
+            <td>安全禁用</td>
             <td>{{collection.newmanOption.insecure}}</td>
           </tr>
           <tr>
-            <td>bail</td>
+            <td>执行保护</td>
             <td>{{collection.newmanOption.bail}}</td>
           </tr>
           <tr>
-            <td>collection file</td>
+            <td>用例集合文件</td>
             <td>
-              <a :href="downloadLink('collectionFile')">Download</a>
+              <a :href="downloadLink('collectionFile')">下载用例集合文件</a>
             </td>
           </tr>
           <tr>
@@ -49,19 +49,19 @@
               {{collection.status}}
             </td>
             <td>
-              <a v-if="collection.iterationData" :href="downloadLink('iterationData')">Download iterationData</a>
-              <a v-if="collection.environment" :href="downloadLink('environment')">Download environment</a>
+              <a v-if="collection.iterationData" :href="downloadLink('iterationData')">下载迭代数据文件</a>
+              <a v-if="collection.environment" :href="downloadLink('environment')">下载环境文件</a>
             </td>
           </tr>
           <tr>
             <td>
-              start time:
+              开始时间:
               <input class="form-control" type="text" v-model="startTime" style="width: auto;display: inline-block;">
             </td>
             <td>
-              end time:
+              结束时间:
               <input class="form-control" type="text" v-model="endTime" style="width: auto;display: inline-block;">
-              <button type="button" class="btn btn-outline-primary" v-on:click="go()" style="float: right;cursor: pointer;">Go</button>
+              <button type="button" class="btn btn-outline-primary" v-on:click="go()" style="float: right;cursor: pointer;">查询</button>
             </td>
           </tr>
           </tbody>
@@ -73,7 +73,7 @@
         <table class="table" v-if="assertionsFailures">
           <thead>
             <tr>
-              <th colspan="2" style="text-align: center">Assertions Failures</th>
+              <th colspan="2" style="text-align: center">断言失败</th>
             </tr>
           </thead>
           <tbody>
@@ -89,7 +89,7 @@
         <table class="table" v-if="testScriptsFailures">
           <thead>
           <tr>
-            <th colspan="2" style="text-align: center">TestScripts Failures</th>
+            <th colspan="2" style="text-align: center">断言脚本错误</th>
           </tr>
           </thead>
           <tbody>
@@ -102,7 +102,7 @@
       </div>
     </div>
     <div class="row" v-show="!showLine">
-      <h1 style="margin: auto;color: #9e9e9e;">Loading...</h1>
+      <h1 style="margin: auto;color: #9e9e9e;">加载中...</h1>
     </div>
     <show-line-chart v-if="showLine" :collectionId="collectionId" :summary="summaries"></show-line-chart>
   </div>

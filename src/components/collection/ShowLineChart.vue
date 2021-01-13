@@ -6,13 +6,13 @@
       <table class="table table-striped">
         <thead>
         <tr>
-          <th>started</th>
-          <th>completed</th>
-          <th>cost(ms)</th>
-          <th>assertions success</th>
-          <th>assertions failed</th>
-          <th>testScripts success</th>
-          <th>testScripts failed</th>
+          <th>开始</th>
+          <th>结束</th>
+          <th>时间成本(ms)</th>
+          <th>断言成功</th>
+          <th>断言失败</th>
+          <th>断言脚本正确</th>
+          <th>断言脚本错误</th>
         </tr>
         </thead>
         <tbody>
@@ -30,8 +30,9 @@
         </tbody>
       </table>
       <div style="text-align: center;">
-          <button type="button" class="click btn btn-outline-primary" :disabled="pagingSummary.page == 1" v-on:click="paging(-1)">Last</button>
-          <button type="button" class="click btn btn-outline-primary" :disabled="pagingSummary.page == pagingSummary.totalPage" v-on:click="paging(1)">Next</button>
+          <button type="button" class="click btn btn-outline-primary" :disabled="pagingSummary.page == 1" v-on:click="paging(-1)">上一页</button>
+          <button type="button" class="click btn btn-outline-primary" :disabled="pagingSummary.page == pagingSummary.totalPage"
+                  v-on:click="paging(1)">下一页</button>
       </div>
     </div>
     <modal :collectionInfo="modal.collectionInfo" :title="modal.title" :show="modal.show" :failures="modal.failures" v-on:close="modal.show = false"></modal>
@@ -93,7 +94,7 @@
           labels: lineX,
           datasets: [
             {
-              label: 'cost(ms)',
+              label: '时间成本(ms)',
               backgroundColor: '#' + Math.random().toString(16).slice(2, 8),
               data: costLineY
             }
@@ -105,14 +106,14 @@
           labels: lineX,
           datasets: [
             {
-              label: 'assertions failures count',
+              label: '断言失败次数',
               backgroundColor: assertionsFailuresColor,
               borderColor: assertionsFailuresColor,
               data: assertionsLineY,
               fill: false
             },
             {
-              label: 'testScripts failures count',
+              label: '脚本错误次数',
               backgroundColor: testScriptsFailuresColor,
               borderColor: testScriptsFailuresColor,
               data: assertionsLineY,

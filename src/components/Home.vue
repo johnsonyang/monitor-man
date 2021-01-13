@@ -64,15 +64,15 @@
               </span>
               <span>
                 <button class="btn btn-success btn-sm" disabled="disabled" v-if="item.summary">
-                  断言脚本正确 <span class="badge my-badge-success badge-pill">{{item.summary.testScripts.success}}</span>
+                  脚本正确 <span class="badge my-badge-success badge-pill">{{item.summary.testScripts.success}}</span>
                 </button>
               </span>
               <span>
                 <button class="btn btn-danger btn-sm" disabled="disabled" v-if="item.summary && item.summary.testScripts.failed == 0">
-                  断言脚本错误 <span class="badge my-badge-danger badge-pill">{{item.summary.testScripts.failed}}</span>
+                  脚本错误 <span class="badge my-badge-danger badge-pill">{{item.summary.testScripts.failed}}</span>
                 </button>
                 <button class="btn btn-danger btn-sm mm-click" v-on:click="showFailures(item.id, item.summary.testScripts.failures, 'TestScripts Failures')" v-else-if="item.summary">
-                  断言脚本错误 <span class="badge my-badge-danger badge-pill">{{item.summary.testScripts.failed}}</span>
+                  脚本错误 <span class="badge my-badge-danger badge-pill">{{item.summary.testScripts.failed}}</span>
                 </button>
               </span>
             </div>

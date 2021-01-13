@@ -37,6 +37,7 @@ const handler = require('./server/handler');
 app.use(handler.routes());
 app.use(handler.allowedMethods());
 
+// note 数据来源,MySQL
 const film = require('./server/film');
 app.use(film.routes());
 app.use(film.allowedMethods());
@@ -51,6 +52,8 @@ app.on('error', function(err, ctx){
 // const apiRouter = require('./routes/api');
 //
 //
+
+// note 暂时不用MySQL数据库 db已经在上面的模型里面引入了..
 require('./db');
 //
 // // configuracion para recibir peticiones post

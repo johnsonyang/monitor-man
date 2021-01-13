@@ -2,18 +2,29 @@
 var path = require('path')
 
 module.exports = {
+  // note npm run build
+  // note npm run build --report
+  // note npm install --save-dev compression-webpack-plugin
+//   Johnson@Johnsons-NMBP:~/2020study/monitor-man(master⚡) » npm run build --report
+// > monitor-man@1.0.0 build /Users/Johnson/2020study/monitor-man
+// > node build/build.js
+//
+// note ⠇ building for production...
   build: {
     env: require('./prod.env'),
     index: path.resolve(__dirname, '../dist/index.html'),
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
+    // productionSourceMap初始为false
     productionSourceMap: false,
     // Gzip off by default as many popular static hosts such as
     // Surge or Netlify already gzip all static assets for you.
     // Before setting to `true`, make sure to:
-    // npm install --save-dev compression-webpack-plugin
-    productionGzip: false,
+    // note npm install --save-dev compression-webpack-plugin
+    // 参考webpack.prod.conf.js里面的if (config.build.productionGzip) {
+    // productionGzip初始为false
+    productionGzip: true,
     productionGzipExtensions: ['js', 'css'],
     // Run the build command with an extra argument to
     // View the bundle analyzer report after build finishes:
@@ -21,6 +32,7 @@ module.exports = {
     // Set to `true` or `false` to always turn it on or off
     bundleAnalyzerReport: process.env.npm_config_report
   },
+  // note npm run dev
   dev: {
     env: require('./dev.env'),
     port: 8080,

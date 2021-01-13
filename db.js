@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-const appLogger = require('./server/util/log').get('app')
+const appLogger = require('./server/util/log').get('mysql')
 
 const FilmModel = require('./models/films');
 const UserModel = require('./models/users');

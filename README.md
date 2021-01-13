@@ -37,6 +37,15 @@ build docker image:
 1. wget https://nodejs.org/dist/v8.4.0/node-v8.4.0-linux-x64.tar.xz
 1. docker build -t yangxikun/monitor-man:2.0.1 .
 
+#### johnson add //  [实际使用] + compression-webpack-plugin@1.1.12
+ https://blog.csdn.net/LLL_liuhui/article/details/104671887
+ compression-webpack-plugin压缩代码，现在的最新版本要求Webpack v4以上，node6以上，所以如果是vue2.x，下载的版本要降低到如下面
+ 
+ Error: Cannot find module '/Users/Johnson/2020study/monitor-man/dist/app.js'
+ 
+ npm install --save-dev compression-webpack-plugin@1.1.11
+ compression-webpack-plugin v5.13.0 to package.json
+johnson add "webpack": "^5.13.0"
 #### Available config environment variable
 
 * PORT: listen port
